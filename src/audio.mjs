@@ -58,6 +58,7 @@ export function createAudio() {
       wetGain.gain.setTargetAtTime(tunnel ? 0.5 : 0, t, 0.4);
     },
     near(combo, side) { noise(0.35, 700, 3200, 0.5, 1.5, side * 0.7); tone(520 * Math.pow(1.0595, Math.min(combo, 12) * 2), 0.18, 'triangle', 0.22, master, 0.04); tone(780 * Math.pow(1.0595, Math.min(combo, 12) * 2), 0.18, 'sine', 0.14, master, 0.1); },
+    double(combo) { noise(0.5, 400, 4500, 0.6, 1.2, 0); [523, 659, 784, 1047].forEach((f, i) => tone(f * Math.pow(1.0595, Math.min(combo, 8)), 0.22, 'triangle', 0.22, master, 0.04 + i * 0.07)); },
     pass() { noise(0.18, 500, 1400, 0.16, 1, 0); },
     crash() { noise(0.5, 900, 80, 0.9, 0.7); tone(70, 0.4, 'square', 0.4); tone(48, 0.55, 'sawtooth', 0.3); },
     end() { tone(392, 0.3, 'triangle', 0.25); tone(523, 0.3, 'triangle', 0.25, master, 0.18); tone(659, 0.5, 'triangle', 0.25, master, 0.36); },
