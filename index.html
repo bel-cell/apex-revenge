@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="APEX">
+<meta name="theme-color" content="#05060d">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>APEX REVENGE | 夜の首都高</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+</head><body>
+<canvas id="gl"></canvas>
+<div id="flash"></div>
+<div id="hud" hidden>
+  <div class="hud-top">
+    <div><span class="lbl">SCORE</span><b id="score">0</b></div>
+    <div class="center"><span class="lbl">TIME</span><b id="time">90</b></div>
+    <div class="right"><span class="lbl">LIFE</span><b id="life">♥♥♥</b></div>
+  </div>
+  <div id="combo" class="combo"></div>
+  <div id="pop" class="pop"></div>
+  <div class="hud-bottom"><b id="speed">0</b><span>km/h</span></div>
+  <div id="fps" hidden></div>
+</div>
+<section id="title" class="screen">
+  <h1>APEX REVENGE</h1>
+  <p class="sub">夜の首都高。一般車をギリギリで抜けろ。</p>
+  <ul class="how">
+    <li><b>ニアミス</b>で加点。連続するとコンボ倍率UP（最大×6）</li>
+    <li>衝突3回でゲームオーバー。90秒走り切ればリザルト</li>
+    <li class="kb">← → / A D：ハンドル　↑ / W：アクセル　↓ / S：ブレーキ　P：一時停止</li>
+    <li class="touch-only">画面左下の ◀ ▶ でハンドル、右下の ACCEL / BRAKE で加減速（スマホは横向き推奨）</li>
+  </ul>
+  <div id="tilt-ui" class="touch-only-block">
+    <p id="tilt-status" class="muted"></p>
+    <div class="row"><button id="tilt-toggle" class="chip">傾きハンドル</button><button id="tilt-invert" class="chip">操舵方向</button><button id="tilt-sens" class="chip">感度</button></div>
+  </div>
+  <button id="start" class="primary">START</button>
+  <p class="muted">Enter / Space / タップで開始</p>
+</section>
+<section id="paused" class="screen" hidden><h2>一時停止</h2><button id="resume" class="primary">再開</button><button id="recenter2" class="chip touch-only-block">中心を合わせ直す</button><p class="muted">P / Esc</p></section>
+<section id="result" class="screen" hidden>
+  <h2 id="result-title">RESULT</h2>
+  <div class="rank" id="rank">-</div>
+  <dl>
+    <dt>スコア</dt><dd id="r-score">0</dd>
+    <dt>ニアミス</dt><dd id="r-near">0</dd>
+    <dt>最大コンボ</dt><dd id="r-combo">0</dd>
+    <dt>衝突</dt><dd id="r-crash">0</dd>
+    <dt>走行距離</dt><dd id="r-dist">0</dd>
+  </dl>
+  <button id="retry" class="primary">もう一度</button>
+  <p class="muted">Enter / R / タップ</p>
+</section>
+<div id="touch" hidden>
+  <button id="recenter" class="chip recenter">⟲ 中心</button>
+  <div class="pad left"><button id="t-left" aria-label="左">◀</button><button id="t-right" aria-label="右">▶</button></div>
+  <div class="pad right"><button id="t-brake" aria-label="ブレーキ">BRAKE</button><button id="t-accel" aria-label="アクセル">ACCEL</button></div>
+</div>
+<aside id="a2hs" hidden>
+  <b>全画面で遊ぶには</b>
+  <span>Safariの共有ボタン <i>⬆︎</i> →「ホーム画面に追加」→ ホーム画面のアイコンから起動（ブラウザのバーが消えます）</span>
+  <button id="a2hs-close" class="chip">閉じる</button>
+</aside>
+<div id="rotate" hidden>スマホを横向きにしてください</div>
+<script type="module" src="src/main.mjs"></script>
+</body></html>

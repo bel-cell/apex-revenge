@@ -1,0 +1,76 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:none}
+html,body{margin:0;height:100%;background:#05060d;color:#eaf2ff;font-family:system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",sans-serif;overflow:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block}
+#flash{position:fixed;inset:0;pointer-events:none;opacity:0;background:#fff;transition:opacity .5s ease-out}
+#hud{position:fixed;inset:0;pointer-events:none;font-variant-numeric:tabular-nums;text-shadow:0 0 12px #0008}
+.hud-top{display:flex;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left))}
+.hud-top .center{text-align:center}.hud-top .right{text-align:right}
+.lbl{display:block;font-size:11px;letter-spacing:.2em;color:#8fb4ff}
+.hud-top b{font-size:clamp(22px,4.2vw,40px);font-weight:700}
+#life{color:#ff5b7a;letter-spacing:.1em}
+.combo{position:absolute;left:50%;top:18%;transform:translateX(-50%);font-size:clamp(20px,4vw,38px);font-weight:800;color:#ffd24a;opacity:0;transition:opacity .15s}
+.combo.on{opacity:1}
+.pop{position:absolute;left:50%;top:30%;transform:translateX(-50%) scale(1);font-size:clamp(26px,5.5vw,56px);font-weight:900;color:#7dfcff;opacity:0;white-space:nowrap}
+.pop.show{animation:pop .75s ease-out}
+.pop.crash{color:#ff4d5e}
+@keyframes pop{0%{opacity:0;transform:translateX(-50%) scale(.6)}15%{opacity:1;transform:translateX(-50%) scale(1.15)}100%{opacity:0;transform:translateX(-50%) translateY(-40px) scale(1)}}
+.hud-bottom{position:absolute;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:baseline;gap:6px}
+.hud-bottom b{font-size:clamp(34px,7vw,64px);font-style:italic}.hud-bottom span{color:#8fb4ff}
+#fps{position:absolute;left:8px;bottom:8px;font:12px monospace;color:#8f8}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at center,#0b1230cc,#02030acc);text-align:center;padding:16px}
+.screen[hidden],#hud[hidden],#touch[hidden],#rotate[hidden]{display:none}
+h1{margin:0;font-size:clamp(36px,9vw,92px);letter-spacing:.12em;font-style:italic;background:linear-gradient(90deg,#7dfcff,#ff4fd8);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:0;font-size:clamp(24px,5vw,44px);letter-spacing:.2em}
+.sub{margin:0;font-size:clamp(14px,2.4vw,22px);color:#c9d6ff}
+.how{list-style:none;margin:0;padding:0;font-size:clamp(12px,1.9vw,16px);color:#aab8e8;line-height:1.8}
+.muted{margin:0;font-size:12px;color:#7d8ab8}
+.primary{pointer-events:auto;font:inherit;font-weight:800;font-size:clamp(18px,3vw,26px);letter-spacing:.2em;padding:12px 44px;border:2px solid #7dfcff;border-radius:999px;background:#7dfcff22;color:#eaffff;cursor:pointer;box-shadow:0 0 24px #7dfcff55}
+.primary:active{background:#7dfcff55}
+.rank{font-size:clamp(70px,16vw,150px);font-weight:900;font-style:italic;color:#ffd24a;text-shadow:0 0 30px #ffd24a88;line-height:1}
+dl{display:grid;grid-template-columns:auto auto;gap:6px 28px;margin:0;font-size:clamp(14px,2.4vw,20px)}
+dt{color:#8fb4ff;text-align:right}dd{margin:0;text-align:left;font-weight:700}
+.touch-only{display:none}
+body.is-touch .touch-only{display:list-item}body.is-touch .kb{display:none}
+#touch{position:fixed;inset:0;pointer-events:none}
+.pad{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;gap:14px}
+.pad.left{left:calc(14px + env(safe-area-inset-left))}.pad.right{right:calc(14px + env(safe-area-inset-right))}
+.pad button{pointer-events:auto;touch-action:none;font:inherit;font-weight:900;color:#eaffff;border:2px solid #7dfcffaa;background:#0b1a3a88;border-radius:22px;
+  width:clamp(84px,16vw,130px);height:clamp(84px,24vh,130px);font-size:clamp(18px,3.4vw,30px);backdrop-filter:blur(2px)}
+.pad button.down{background:#7dfcff66;border-color:#fff}
+#t-accel{border-color:#7dff9a;width:clamp(110px,22vw,170px)}#t-brake{border-color:#ff7d8a}
+#rotate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#02030aee;font-size:20px;z-index:10}
+
+.touch-only-block{display:none}
+body.is-touch .touch-only-block{display:block}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{pointer-events:auto;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;border:1px solid #7dfcff88;background:#0b1a3a99;color:#eaffff}
+.recenter{position:absolute;top:calc(56px + env(safe-area-inset-top));right:calc(14px + env(safe-area-inset-right));display:none}
+body.tilt-on .recenter{display:block}
+body.tilt-on #t-left, body.tilt-on #t-right{display:none}
+body.tilt-on .pad.left{display:none}
+@media (max-height:460px){
+  .screen{gap:6px;padding:6px}
+  h1{font-size:clamp(28px,11vh,56px)}
+  .sub{font-size:13px}.how{font-size:11px;line-height:1.5}
+  .primary{padding:8px 34px;font-size:18px}
+  .muted{font-size:10px}
+  .rank{font-size:64px}
+  dl{font-size:13px;gap:3px 20px}
+}
+.recenter{top:calc(84px + env(safe-area-inset-top))}
+/* ---- iPhone landscape: Safari bars can leave only ~250px of height. Keep controls compact and the view clear. */
+html,body{position:fixed;inset:0;width:100%;height:100%;overscroll-behavior:none}
+#a2hs{position:fixed;left:50%;transform:translateX(-50%);top:calc(6px + env(safe-area-inset-top));z-index:5;display:flex;align-items:center;gap:10px;max-width:min(92vw,720px);
+  padding:6px 10px;border-radius:12px;background:#0b1a3aee;border:1px solid #7dfcff88;font-size:12px;line-height:1.35}
+#a2hs[hidden]{display:none}
+@media (max-height:320px){
+  .hud-top b{font-size:20px}.lbl{font-size:9px}
+  .hud-bottom b{font-size:30px}
+  .pad{bottom:calc(8px + env(safe-area-inset-bottom));gap:10px}
+  .pad button{width:clamp(64px,13vw,96px);height:clamp(56px,22vh,84px);font-size:16px;border-radius:16px}
+  #t-accel{width:clamp(84px,17vw,120px)}
+  .recenter{top:calc(64px + env(safe-area-inset-top))}
+  .pop{top:22%;font-size:24px}.combo{top:14%;font-size:18px}
+}
+@media (max-height:320px) and (min-aspect-ratio:2/1){.hud-bottom{display:none}}
+#a2hs button{white-space:nowrap}

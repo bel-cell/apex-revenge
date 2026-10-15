@@ -1,0 +1,16 @@
+{
+  "name": "APEX REVENGE",
+  "short_name": "APEX",
+  "description": "夜の首都高、ニアミス重視のレースゲーム",
+  "start_url": "./?pwa=1",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "landscape",
+  "background_color": "#05060d",
+  "theme_color": "#05060d",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
